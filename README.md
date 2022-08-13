@@ -1,5 +1,6 @@
 # Hexo-plugin-tabs
 
+
 ## Introduction
 **Version: 0.01 DEV**
 
@@ -19,6 +20,8 @@ Simply run "npm install hexo-plugin-tabs" or download the source code and unzip 
 ```bash
 npm install hexo-plugin-tabs
 ```
+
+after every "hexo g" or "hexo s", you will see a "tabs generated successfully" as a result of installation
 **or**
 ```bash
 git clone https://github.com/sclass53/hexo-plugin-tabs.git node_modules/hexo-plugin-tabs
