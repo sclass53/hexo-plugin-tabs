@@ -1,8 +1,22 @@
-import re,sys,tkinter
+import re,sys,os
 
-a=tkinter.Tk()
 def openreadtabs(file):
-    _code="""
+    _path_,__tmp=os.path.split(file)
+    path=_path_[:-6]
+    #print(path)
+    if not os.path.isdir(path+"httabs\\"):
+        os.system("mkdir "+path+"httabs\\")
+    __tmp=(__tmp.split('.'))[0]
+    ##print(path+"httabs\\"+__tmp+".html")
+    
+    ## Html source code
+    try:
+        with open("./source.html","r") as _f:
+            _code = _f.read()    
+    except:
+        _code = """---
+layout: false
+--- 
 <!--
 %s
 -->
@@ -66,74 +80,83 @@ def openreadtabs(file):
         </div>
     </body>
 </html>
-    """    
+
+        """
     try:
         with open(file,"r") as f:
-            _file_getch=f.read()
+            _file_getch = f.read()
     except:
-        print("File not found")
+        #print("plugin-tabs: File not found")
         return 0
     if "<!--tabencoded-->" in _file_getch:
-        print("Already encoded! please delete the <!--tabencoded--> to regenerate")
+        #print("plugin-tabs: Already encoded! please delete the <!--tabencoded--> to regenerate")
         return 0
-    m=_file_getch.split('\n')
+    m = _file_getch.split('\n')
     
-    fgetch=_file_getch.split("\n")
-    startre=re.compile("!!! \w+")
-    titlere=re.compile("\+\+\+\+\w+")
-    std=-1
-    edd=-1
-    solutions=[]
-    tmp=-1
-    ttitle=""
+    fgetch = _file_getch.split("\n")
+    startre = re.compile("!!! \w+")
+    titlere = re.compile("\+\+\+\+\w+")
+    std = -1
+    edd = -1
+    solutions = []
+    tmp = -1
+    ttitle = ""
     
-    if fgetch[-1]=='':
+    if fgetch[-1] == '':
         fgetch.pop()
     for i in range(len(fgetch)):
         if startre.match(fgetch[i]):
-            std=i
-        elif fgetch[i]=="++++":
-            edd=i
-    if (std==-1 or edd==-1):
-        print("No tabs found")
+            std = i
+        elif fgetch[i] == "++++":
+            edd = i
+    if (std == -1 or edd == -1):
+        ##print("plugin-tabs: No tabs found")
         return 0
-    fgetch=fgetch[std+1:edd]
+    fgetch = fgetch[std+1:edd]
     for i in fgetch:
         if titlere.match(i):
-            if (tmp!=-1):
-                solutions[tmp][1]=solutions[tmp][1][:-1]
-            ttitle=i[4:]
-            tmp+=1
+            if (tmp != -1):
+                solutions[tmp][1] = solutions[tmp][1][:-1]
+            ttitle = i[4:]
+            tmp += 1
             solutions.append([])
             solutions[tmp].append(ttitle)
             solutions[tmp].append("")
             continue
-        solutions[tmp][1]+=(i+'\n')
-    solutions[-1][1]=solutions[-1][1][:-1]
+        solutions[tmp][1] += (i+'\n')
+    solutions[-1][1] = solutions[-1][1][:-1]
     
     
-    btnformat="""<td><button onclick='switchargs("{}")' class="disabled" id="{}" name="www">{}</button></td>"""
-    btns=""""""
-    io=[]
+    btnformat = """<td><button onclick = 'switchargs("{}")' class = "disabled" id = "{}" name = "www">{}</button></td>"""
+    tabformat = """<style>
+    iframe{
+        height: auto;
+        width: auto;
+    }
+</style>
+<iframe src="%s"></iframe>\n"""
+    btns = """"""
+    io = []
     for i in range(len(solutions)):
-        btns+=(btnformat.format(i+1,i+1,solutions[i][0]))
+        btns += (btnformat.format(i+1,i+1,solutions[i][0]))
         io.append(solutions[i][1])
     
     
-    code=_code%(_file_getch,str(io),btns)
-    #print(code)
-    m=m[:std]+code.split('\n')+m[edd+1:]
-    r=''
+    code = _code%(_file_getch,str(io),btns)
+    ###print(code)
+    m = m[:std]+(tabformat%("\\httabs\\"+__tmp+".html")).split('\n')+m[edd+1:]+["\n"]+"<!--tabencoded-->".split("\n")
+    r = ''
     for i in range(len(m)):
-        r+=m[i]
-        r+='\n'
+        r += m[i]
+        r += '\n'
     with open(file,"w") as f:
-        f.write("<!--tabencoded-->\n"+r)
-        
-    print("Encode success")
-qre=sys.argv
-if len(qre)==1:
-    print("No args supplied")
+        f.write(r)
+    with open(path+"httabs\\"+__tmp+".html","w") as f:
+        f.write(code)    
+    #print("plugin-tabs: Encode success")
+qre = sys.argv
+if len(qre) == 1:
+    print("plugin-tabs: No args supplied")
 else:
     openreadtabs(qre[1])
 

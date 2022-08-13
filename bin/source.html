@@ -1,0 +1,64 @@
+
+<!--
+%s
+-->
+<meta charset="UTF-8">
+<html>
+    <head>
+        <script>
+            var qyu=document.getElementsByName("www");
+            var sh=%s;
+            function switchargs(args){
+                for(var i=0;i<qyu.length;i++){
+                    qyu[i].className="not";
+                }document.getElementById(args).className="enabled";
+                document.getElementById("text").innerText=sh[args-1];
+            }
+        </script>
+    </head>
+    <body>
+        <table class="_tabs">
+            <tr>
+                %s
+            </tr>
+        </table>
+        <style>
+            .textarea p{
+                border: 2px;
+                border-style: groove;
+                border-color: #444444;
+                font-size: 18px; 
+                padding: 7px;
+                padding-top: 6px;
+                margin: 0px;
+            }
+            table._tabs{
+                display : table;
+                border-collapse :separate;
+                border-spacing: 2px; 
+                border-color: grey;
+                border-collapse : separate;
+            }
+            table tr td button{
+                padding: 8px;
+                font-size: 20px;
+                border-top: 0px;
+                border-left: 0px;
+                border-right: 0px;
+                border-color: #617eff;
+            }
+            table tr td button.enabled{
+                background-color: rgb(192, 192, 192);
+                color: #2242d0;
+            }
+            table tr td button.not{
+                border-bottom: 0px;
+            }
+        </style>
+        <div class="textarea">
+        <p id="text">
+            Click a tab button to view
+        </p>
+        </div>
+    </body>
+</html>
