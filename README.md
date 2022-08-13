@@ -1,5 +1,6 @@
 # Hexo-plugin-tabs
 
+## Introduction
 **Version: 0.01 DEV**
 
 This is a plugin for building styled tabs in hexo.
@@ -8,9 +9,10 @@ This is a plugin for building styled tabs in hexo.
 
 Not uploaded
 
-**Dependencies: Node.js>=0.10.0, hexo**
+**Dependencies: Node.js>=0.10.0, hexo, windows (Available for only windows)**
 
-- Installation
+## How to use
+- **Installation**
 
 Simply run "npm install hexo-plugin-tabs" or download the source code and unzip it to "yourwebpage/node_modules/"
 
@@ -32,7 +34,7 @@ Then add one line "hexo-plugin-tabs>=0.0.1 "in the "dependencies" of "package.js
 }
 ```
 
-- Syntax
+- **Syntax**
 
 Example:
 
@@ -44,3 +46,32 @@ First tab section
 Second tab section
 ++++
 ```
+
+Simply type **!!! tabs** at the section you want to insert tabs, and add "++++tab title 1" to add a tab
+Insert tab text between tab markings (aka. ++++).
+To end, mark "++++"
+
+It will automatically be converted into html
+```html
+<iframe src="\httabs\ok.html"></iframe>
+```
+**Result**:
+
+![Result-image]()
+
+A postname.html will be created under the /source/httabs/ dir (httabs is created after first generating process). Check /bin/source.html for more imformation.
+
+run
+```
+hexo g
+hexo s
+```
+to test
+
+## License
+
+CC-BY-SA 4.0
+
+## Contributors
+
+@ginoblog, @melvinzhang (not a user)
