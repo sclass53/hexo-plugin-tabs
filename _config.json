@@ -1,0 +1,7 @@
+{
+    "version":0.01,
+    "generator":"bin/dist/sa.exe",
+    //Mode list: dark,light,linear-gradient,sun,handwritten
+    "mode": "light",
+    "exec-command":"bin/exec.js"
+}
