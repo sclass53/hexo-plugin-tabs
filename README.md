@@ -8,7 +8,7 @@ This is a plugin for building styled tabs in hexo.
 
 **Example**:
 
-Not uploaded
+![example1](https://user-images.githubusercontent.com/109156954/184471955-5e90987b-0be7-438f-aca2-6753d776d8d7.jpg)
 
 **Dependencies: Node.js>=0.10.0, hexo, windows (Available for only windows)**
 
@@ -60,7 +60,7 @@ It will automatically be converted into html
 ```
 **Result**:
 
-![Result-image]()
+![example2](https://user-images.githubusercontent.com/109156954/184471961-db3e481c-8138-4bee-b3c0-cf224ec096d2.jpg)
 
 A postname.html will be created under the /source/httabs/ dir (httabs is created after first generating process). Check /bin/source.html for more imformation.
 
